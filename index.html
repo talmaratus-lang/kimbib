@@ -1,131 +1,507 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jual Kimbib - Kimbab Praktis</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fffbe6;
-      color: #3b3a30;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
-    .container {
-      background: #fff;
-      max-width: 480px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 25px;
-      text-align: center;
-    }
-    h1 {
-      color: #e67e22;
-      font-weight: 700;
-      margin-bottom: 0;
-      letter-spacing: 2px;
-    }
-    .price {
-      font-size: 22px;
-      font-weight: 600;
-      margin: 10px 0 20px;
-      color: #27ae60;
-    }
-    .desc {
-      font-style: italic;
-      color: #555;
-      margin-bottom: 30px;
-      line-height: 1.4;
-    }
-    .img-kimbib {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 8px rgba(230,126,34,0.3);
-    }
-    .options {
-      text-align: left;
-      margin-bottom: 25px;
-    }
-    .options label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-    select, .price-package {
-      width: 100%;
-      padding: 10px 12px;
-      font-size: 16px;
-      border: 2px solid #e67e22;
-      border-radius: 8px;
-      outline: none;
-      cursor: pointer;
-    }
-    .price-package {
-      margin-top: 10px;
-      background-color: #f8e5d1;
-      color: #d35400;
-      font-weight: 700;
-      text-align: center;
-    }
-    .footer {
-      margin-top: 40px;
-      font-size: 13px;
-      color: #999;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimbib - Authentic & Fresh Kimbap</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kimbib: {
+                            orange: '#f97316',
+                            yellow: '#fbbf24',
+                            green: '#4ade80',
+                            darkgreen: '#166534',
+                            cream: '#fffbeb',
+                            white: '#ffffff',
+                            text: '#1f2937'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fffbeb; /* Cream background */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fffbeb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+        /* Modal animation */
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 300ms, transform 300ms;
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Kimbib</h1>
-    <img class="img-kimbib" src="https://i.imgur.com/i4vKkHV.jpg" alt="Kimbib Kimbab" />
-    <p class="price">Harga: Rp 10.000 / porsi | Rp 2.000 / slice</p>
-    <p class="desc">
-      Solusi lapar instan tanpa ribet cucian, kenyang praktis, kantong ga krisis!
-    </p>
-    <div class="options">
-      <label for="cocolan">Cocolan Kecap Asin:</label>
-      <select id="cocolan" name="cocolan">
-        <option value="ori">Ori</option>
-        <option value="mayo">Toping Mayo</option>
-      </select>
-    </div>
-    <div class="options">
-      <label for="paket">Pilih Paket:</label>
-      <select id="paket" name="paket">
-        <option value="solo">Solo Kimbib - Rp 10.000</option>
-        <option value="solo-slice">Slice Kimbib (1 Slice) - Rp 2.000</option>
-        <option value="paket">Paket Kimbib + Es Teh Manis - Rp 15.000</option>
-      </select>
-      <div class="price-package" id="price-package">Harga Paket: Rp 15.000</div>
-    </div>
-    <div class="footer">
-      *Pesan sekarang dan nikmati kimbib segar dengan harga hemat!<br/>
-      *Es Teh Manis segelas sebagai teman kenikmatanmu.
-    </div>
-  </div>
+<body class="font-sans text-kimbib-text antialiased relative">
 
-  <script>
-    const paketSelect = document.getElementById('paket');
-    const priceDisplay = document.getElementById('price-package');
+    <nav class="fixed w-full z-40 bg-kimbib-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-seedling text-kimbib-orange text-2xl"></i>
+                    <span class="font-heading font-bold text-2xl tracking-tight text-kimbib-text">Kim<span class="text-kimbib-orange">bib</span>.</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#hero" class="text-kimbib-text hover:text-kimbib-orange font-semibold transition">Beranda</a>
+                    <a href="#keunggulan" class="text-kimbib-text hover:text-kimbib-orange font-semibold transition">Kenapa Kimbib?</a>
+                    <a href="#menu" class="text-kimbib-text hover:text-kimbib-orange font-semibold transition">Menu Spesial</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    paketSelect.addEventListener('change', () => {
-      const val = paketSelect.value;
-      let priceText = "";
-      if(val === "solo") {
-        priceText = "Harga Paket: Rp 10.000";
-      } else if(val === "solo-slice") {
-        priceText = "Harga Paket: Rp 2.000";
-      } else if(val === "paket") {
-        priceText = "Harga Paket: Rp 15.000";
-      }
-      priceDisplay.textContent = priceText;
-    });
-  </script>
+    <section id="hero" class="pt-24 pb-12 md:pt-32 md:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left space-y-6">
+            <div class="inline-block bg-orange-100 text-kimbib-orange px-4 py-2 rounded-full font-bold text-sm mb-2 shadow-sm border border-orange-200">
+                ✨ Sensasi Kimbap Otentik No. 1
+            </div>
+            <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+                Gulungan Bahagia <br> di Setiap <span class="text-kimbib-orange">Gigitan!</span>
+            </h1>
+            <p class="text-lg text-gray-600 md:pr-10">
+                Rasakan kelezatan kimbap segar dengan resep otentik Korea, bahan berkualitas, dan 100% Halal. Cocok untuk menemani hari sibukmu!
+            </p>
+            <div class="pt-4">
+                <a href="#menu" class="bg-kimbib-orange hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full shadow-lg shadow-orange-500/30 transform hover:-translate-y-1 transition duration-300 text-lg inline-flex items-center gap-2">
+                    <i class="fa-solid fa-utensils"></i> Pesan Sekarang
+                </a>
+            </div>
+        </div>
+        <div class="w-full md:w-1/2 relative">
+            <div class="absolute inset-0 bg-kimbib-yellow rounded-full blur-3xl opacity-30 transform -translate-x-10 translate-y-10"></div>
+            <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Delicious Kimbap" class="relative z-10 w-full object-cover rounded-3xl shadow-2xl border-4 border-white h-[400px] lg:h-[500px]">
+        </div>
+    </section>
+
+    <section id="keunggulan" class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-heading text-3xl font-bold text-kimbib-text mb-4">Kenapa Harus Kimbib?</h2>
+                <div class="w-20 h-1 bg-kimbib-orange mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-kimbib-cream p-8 rounded-2xl text-center border border-orange-100 hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-orange-100 text-kimbib-orange rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-3">Bahan Segar Tiap Hari</h3>
+                    <p class="text-gray-600">Sayuran, nasi, dan lauk selalu dipersiapkan fresh setiap harinya untuk menjamin kualitas rasa.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-kimbib-cream p-8 rounded-2xl text-center border border-orange-100 hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-3">Resep Otentik Korea</h3>
+                    <p class="text-gray-600">Dibuat menggunakan bumbu pilihan dan minyak wijen premium yang menghadirkan cita rasa asli.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-kimbib-cream p-8 rounded-2xl text-center border border-orange-100 hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-green-100 text-kimbib-darkgreen rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-3">100% Halal</h3>
+                    <p class="text-gray-600">Semua bahan dan proses pembuatan dijamin 100% halal, aman dan nyaman untuk dikonsumsi siapapun.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-20 bg-kimbib-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-kimbib-text mb-4">Varian Menu Kimbib</h2>
+                <p class="text-gray-600">Pilih menu favoritmu dan sesuaikan dengan cocolan kesukaan!</p>
+                <div class="w-20 h-1 bg-kimbib-darkgreen mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Menu Item 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1553163147-622ab57be1c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kimbib Per Pcs" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-heading font-bold text-lg mb-1">Kimbib (Per Pcs)</h3>
+                        <p class="text-kimbib-orange font-extrabold text-xl mb-3">Rp 2.000</p>
+                        <p class="text-sm text-gray-500 mb-4 flex-grow">Satu gigitan sempurna untuk cemilan ringan. Pas untuk kamu yang pengen nyicip.</p>
+                        
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Cocolan/Topping:</label>
+                        <select id="topping-1" class="w-full bg-gray-50 border border-gray-200 text-gray-700 rounded-xl py-2 px-3 mb-4 focus:outline-none focus:ring-2 focus:ring-kimbib-orange text-sm">
+                            <option value="Original/Tanpa Cocolan">Original / Tanpa Cocolan</option>
+                            <option value="Kecap Asin">Kecap Asin</option>
+                            <option value="Mayo">Mayonnaise</option>
+                        </select>
+                        
+                        <button onclick="addToCart(1, 'Kimbib (Per Pcs)', 2000, 'topping-1')" class="w-full bg-kimbib-text hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition duration-200 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Menu Item 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kimbib Per Porsi" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-heading font-bold text-lg">Kimbib (Per Porsi)</h3>
+                            <span class="bg-green-100 text-kimbib-darkgreen text-xs font-bold px-2 py-1 rounded">Populer</span>
+                        </div>
+                        <p class="text-kimbib-orange font-extrabold text-xl mb-3">Rp 10.000</p>
+                        <p class="text-sm text-gray-500 mb-4 flex-grow">Satu porsi isi gulungan penuh yang mengenyangkan. Cocok untuk makan siang atau malam.</p>
+                        
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Cocolan/Topping:</label>
+                        <select id="topping-2" class="w-full bg-gray-50 border border-gray-200 text-gray-700 rounded-xl py-2 px-3 mb-4 focus:outline-none focus:ring-2 focus:ring-kimbib-orange text-sm">
+                            <option value="Original/Tanpa Cocolan">Original / Tanpa Cocolan</option>
+                            <option value="Kecap Asin">Kecap Asin</option>
+                            <option value="Mayo">Mayonnaise</option>
+                        </select>
+                        
+                        <button onclick="addToCart(2, 'Kimbib (Per Porsi)', 10000, 'topping-2')" class="w-full bg-kimbib-orange hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition duration-200 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col border-2 border-kimbib-yellow relative">
+                    <div class="absolute top-0 right-0 bg-kimbib-yellow text-white text-xs font-bold px-3 py-1 rounded-bl-xl z-10 shadow-sm">Hemat!</div>
+                    <img src="https://images.unsplash.com/photo-1626804475297-41609ea005eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Paket Hemat" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-heading font-bold text-lg mb-1">Paket Hemat</h3>
+                        <p class="text-kimbib-orange font-extrabold text-xl mb-3">Rp 13.000</p>
+                        <p class="text-sm text-gray-500 mb-4 flex-grow">1 Porsi Kimbib + 1 Cup Es Teh Segar. Kombinasi mantap untuk usir dahaga & lapar.</p>
+                        
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Cocolan/Topping:</label>
+                        <select id="topping-3" class="w-full bg-gray-50 border border-gray-200 text-gray-700 rounded-xl py-2 px-3 mb-4 focus:outline-none focus:ring-2 focus:ring-kimbib-orange text-sm">
+                            <option value="Original/Tanpa Cocolan">Original / Tanpa Cocolan</option>
+                            <option value="Kecap Asin">Kecap Asin</option>
+                            <option value="Mayo">Mayonnaise</option>
+                        </select>
+                        
+                        <button onclick="addToCart(3, 'Paket Hemat (Kimbib + Es Teh)', 13000, 'topping-3')" class="w-full bg-kimbib-text hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition duration-200 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kimbib Spesial" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-heading font-bold text-lg mb-1">Kimbib Spesial</h3>
+                        <p class="text-kimbib-orange font-extrabold text-xl mb-3">Rp 15.000</p>
+                        <p class="text-sm text-gray-500 mb-4 flex-grow">Isian ekstra komplit dengan paduan sayur organik dan daging pilihan. Kimbap Sultan!</p>
+                        
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Cocolan/Topping:</label>
+                        <select id="topping-4" class="w-full bg-gray-50 border border-gray-200 text-gray-700 rounded-xl py-2 px-3 mb-4 focus:outline-none focus:ring-2 focus:ring-kimbib-orange text-sm">
+                            <option value="Original/Tanpa Cocolan">Original / Tanpa Cocolan</option>
+                            <option value="Kecap Asin">Kecap Asin</option>
+                            <option value="Mayo">Mayonnaise</option>
+                        </select>
+                        
+                        <button onclick="addToCart(4, 'Kimbib Spesial', 15000, 'topping-4')" class="w-full bg-kimbib-text hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition duration-200 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <button onclick="toggleCart()" class="fixed bottom-6 right-6 bg-kimbib-darkgreen hover:bg-green-700 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-2xl z-50 transition transform hover:scale-110">
+        <i class="fa-solid fa-basket-shopping relative">
+            <span id="cart-badge" class="absolute -top-3 -right-4 bg-kimbib-orange text-white text-xs font-bold px-2 py-1 rounded-full border-2 border-kimbib-darkgreen hidden">0</span>
+        </i>
+    </button>
+
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300 backdrop-blur-sm flex items-center justify-center px-4" onclick="closeCartOnOutsideClick(event)">
+        
+        <div id="cart-modal" class="bg-white rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col transform scale-95 opacity-0 transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center rounded-t-3xl bg-kimbib-cream">
+                <h3 class="font-heading font-bold text-xl text-kimbib-text"><i class="fa-solid fa-basket-shopping text-kimbib-orange mr-2"></i> Keranjang Pesanan</h3>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-red-500 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body (Items List) -->
+            <div class="p-6 overflow-y-auto flex-grow" id="cart-items">
+                <!-- Items will be injected here via JS -->
+                <div class="text-center py-10 text-gray-400 hidden" id="empty-cart-msg">
+                    <i class="fa-regular fa-face-frown-open text-4xl mb-3"></i>
+                    <p>Keranjangmu masih kosong nih.</p>
+                </div>
+            </div>
+
+            <!-- Modal Footer (Total & Checkout) -->
+            <div class="p-6 border-t border-gray-100 bg-gray-50 rounded-b-3xl">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold text-gray-600">Total Pembayaran</span>
+                    <span class="font-heading font-extrabold text-2xl text-kimbib-text" id="cart-total">Rp 0</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" id="checkout-btn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-500/30 transition duration-300 flex items-center justify-center gap-2 opacity-50 cursor-not-allowed" disabled>
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Checkout via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-kimbib-text text-white py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <i class="fa-solid fa-seedling text-kimbib-orange text-xl"></i>
+                <span class="font-heading font-bold text-xl tracking-tight">Kim<span class="text-kimbib-orange">bib</span>.</span>
+            </div>
+            <p class="text-gray-400 text-sm mb-4">Menyajikan kimbap segar dan lezat setiap harinya.</p>
+            <p class="text-gray-500 text-xs">&copy; 2026 Kimbib Kimbap. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // State management
+        let cart = [];
+        const waNumber = "6281230809317"; 
+
+        // DOM Elements
+        const cartBadge = document.getElementById('cart-badge');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartModal = document.getElementById('cart-modal');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const emptyCartMsg = document.getElementById('empty-cart-msg');
+        const cartTotalEl = document.getElementById('cart-total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        // Utility: Format Rupiah
+        const formatRupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        };
+
+        // Add to Cart Logic
+        function addToCart(id, name, price, selectId) {
+            // Get selected topping
+            const selectElement = document.getElementById(selectId);
+            const topping = selectElement.value;
+            
+            // Generate a unique ID based on product ID + topping combination
+            const uniqueItemId = `${id}-${topping.replace(/\s+/g, '')}`;
+
+            // Check if item already exists in cart
+            const existingItemIndex = cart.findIndex(item => item.uniqueId === uniqueItemId);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({
+                    uniqueId: uniqueItemId,
+                    id: id,
+                    name: name,
+                    price: price,
+                    topping: topping,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            
+            // Visual feedback on button
+            const btn = event.currentTarget;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> Ditambahkan!`;
+            btn.classList.add('bg-kimbib-green', 'text-white');
+            btn.classList.remove('bg-kimbib-text', 'bg-kimbib-orange');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('bg-kimbib-green');
+                if(id === 2) {
+                    btn.classList.add('bg-kimbib-orange');
+                } else {
+                    btn.classList.add('bg-kimbib-text');
+                }
+            }, 1500);
+        }
+
+        // Remove from cart
+        function removeItem(uniqueId) {
+            cart = cart.filter(item => item.uniqueId !== uniqueId);
+            updateCartUI();
+        }
+
+        // Adjust quantity
+        function adjustQuantity(uniqueId, delta) {
+            const item = cart.find(i => i.uniqueId === uniqueId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeItem(uniqueId);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        // Update UI (Badge, Modal List, Total)
+        function updateCartUI() {
+            // Update Badge
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (totalItems > 0) {
+                cartBadge.textContent = totalItems;
+                cartBadge.classList.remove('hidden');
+                
+                // Add pop animation to badge
+                cartBadge.classList.add('scale-150');
+                setTimeout(() => cartBadge.classList.remove('scale-150'), 200);
+            } else {
+                cartBadge.classList.add('hidden');
+            }
+
+            // Update List in Modal
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.appendChild(emptyCartMsg);
+                emptyCartMsg.classList.remove('hidden');
+                checkoutBtn.disabled = true;
+                checkoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                checkoutBtn.classList.remove('hover:bg-green-600', 'shadow-lg');
+            } else {
+                emptyCartMsg.classList.add('hidden');
+                checkoutBtn.disabled = false;
+                checkoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                checkoutBtn.classList.add('hover:bg-green-600', 'shadow-lg');
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex justify-between items-center bg-white p-4 rounded-xl mb-3 shadow-sm border border-gray-100';
+                    itemEl.innerHTML = `
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-sm text-gray-800">${item.name}</h4>
+                            <p class="text-xs text-gray-500 mb-1">Toping: <span class="font-semibold text-kimbib-orange">${item.topping}</span></p>
+                            <p class="font-bold text-kimbib-text text-sm">${formatRupiah(item.price)}</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <div class="flex items-center space-x-2 bg-gray-50 p-1 rounded-lg mb-1">
+                                <button onclick="adjustQuantity('${item.uniqueId}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded text-gray-600 shadow-sm hover:bg-gray-200 transition">-</button>
+                                <span class="font-bold text-sm w-4 text-center">${item.quantity}</span>
+                                <button onclick="adjustQuantity('${item.uniqueId}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded text-gray-600 shadow-sm hover:bg-gray-200 transition">+</button>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemEl);
+                });
+            }
+
+            // Update Total
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalEl.textContent = formatRupiah(totalPrice);
+        }
+
+        // Toggle Modal Visibility
+        function toggleCart() {
+            if (cartOverlay.classList.contains('hidden')) {
+                // Open
+                cartOverlay.classList.remove('hidden');
+                // Small delay for CSS transition
+                setTimeout(() => {
+                    cartModal.classList.remove('scale-95', 'opacity-0');
+                    cartModal.classList.add('scale-100', 'opacity-100');
+                }, 10);
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            } else {
+                // Close
+                cartModal.classList.remove('scale-100', 'opacity-100');
+                cartModal.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    cartOverlay.classList.add('hidden');
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                }, 300);
+            }
+        }
+
+        // Close on clicking outside the modal
+        function closeCartOnOutsideClick(event) {
+            if (event.target === cartOverlay) {
+                toggleCart();
+            }
+        }
+
+        // Checkout via WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return;
+
+            let message = "Halo *Kimbib*! 🍙\nSaya ingin memesan menu berikut:\n\n";
+            
+            let total = 0;
+            cart.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                message += `${index + 1}. *${item.name}*\n`;
+                message += `   • Cocolan: ${item.topping}\n`;
+                message += `   • Jml: ${item.quantity} x ${formatRupiah(item.price)}\n`;
+                message += `   • Subtotal: ${formatRupiah(subtotal)}\n\n`;
+            });
+
+            message += `*Total Pembayaran: ${formatRupiah(total)}*\n\n`;
+            message += `Mohon info untuk total biaya ongkir dan rekening pembayaran ya. Terima kasih! 🙏`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+            
+            // Open WA in new tab
+            window.open(waUrl, '_blank');
+            
+            // Optional: clear cart after redirecting to WA
+            // cart = [];
+            // updateCartUI();
+            // toggleCart();
+        }
+
+        // Initialize empty state
+        updateCartUI();
+    </script>
 </body>
 </html>
